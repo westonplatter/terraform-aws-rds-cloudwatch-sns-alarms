@@ -5,27 +5,28 @@
 #   depends_on = ["aws_cloudwatch_event_rule.default"]
 #   input      = "${var.sns_message_override}"
 # }
+
 data "aws_caller_identity" "default" {}
 
 # Make a topic
 resource "aws_sns_topic" "default" {
-  name_prefix = "rds-threshold-alerts"
+  name_prefix = var.sns_topic_name_prefix
 }
 
 resource "aws_db_event_subscription" "default" {
-  name_prefix = "rds-event-sub"
+  name_prefix = var.db_event_subscription_prefix_name
   sns_topic   = "${aws_sns_topic.default.arn}"
 
-  source_type = "db-instance"
+  source_type = var.source_type
   source_ids  = ["${var.db_instance_id}"]
 
   event_categories = [
     "failover",
-    "failure",
-    "low storage",
-    "maintenance",
-    "notification",
-    "recovery",
+    # "failure",
+    # "low storage",
+    # "maintenance",
+    # "notification",
+    # "recovery",
   ]
 
   depends_on = ["aws_sns_topic_policy.default"]

@@ -1,3 +1,18 @@
+variable "sns_topic_name_prefix" {
+  type    = string
+  default = "rds-threshold-alerts"
+}
+
+variable "db_event_subscription_prefix_name" {
+  type    = string
+  default = "rds-event-sub"
+}
+
+variable "source_type" {
+  type    = string
+  default = "db-instance"
+}
+
 variable "db_instance_id" {
   description = "The instance ID of the RDS database instance that you want to monitor."
   type        = "string"
