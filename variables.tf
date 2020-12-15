@@ -68,12 +68,12 @@ variable "swap_usage_threshold" {
 
 variable "db_cluster_event_categories" {
   description = "value"
-  type        = list(str)
+  type        = list(string)
   default     = ["failover"]
 }
 
 variable "db_instance_event_categories" {
   description = "value"
-  type        = list(str)
+  type        = list(string)
   default     = ["failover", "failure", "low storage", "maintenance", "notification", "recovery"]
 }
