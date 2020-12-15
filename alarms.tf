@@ -118,7 +118,7 @@ resource "aws_cloudwatch_metric_alarm" "free_storage_space_too_low" {
   namespace           = "AWS/RDS"
   period              = "600"
   statistic           = "Average"
-  threshold           = "${local.thresholds["FreeStorageSpaceThreshold"]}"
+  threshold           = local.thresholds["FreeStorageSpaceThreshold"]
   alarm_description   = "Average database free storage space over last 10 minutes too low"
   alarm_actions       = [aws_sns_topic.default.arn]
   ok_actions          = [aws_sns_topic.default.arn]
@@ -137,7 +137,7 @@ resource "aws_cloudwatch_metric_alarm" "swap_usage_too_high" {
   namespace           = "AWS/RDS"
   period              = "600"
   statistic           = "Average"
-  threshold           = "${local.thresholds["SwapUsageThreshold"]}"
+  threshold           = local.thresholds["SwapUsageThreshold"]
   alarm_description   = "Average database swap usage over last 10 minutes too high, performance may suffer"
   alarm_actions       = [aws_sns_topic.default.arn]
   ok_actions          = [aws_sns_topic.default.arn]
