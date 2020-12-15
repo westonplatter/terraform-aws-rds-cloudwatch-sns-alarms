@@ -6,6 +6,13 @@
 #   input      = "${var.sns_message_override}"
 # }
 
+locals {
+  event_categories = {
+    "db-cluster"  = var.db_cluster_event_categories
+    "db-instance" = var.db_instance_event_categories
+  }
+}
+
 data "aws_caller_identity" "default" {}
 
 # Make a topic
@@ -14,20 +21,11 @@ resource "aws_sns_topic" "default" {
 }
 
 resource "aws_db_event_subscription" "default" {
-  name_prefix = var.db_event_subscription_prefix_name
-  sns_topic   = "${aws_sns_topic.default.arn}"
-
-  source_type = var.source_type
-  source_ids  = ["${var.db_instance_id}"]
-
-  event_categories = [
-    "failover",
-    # "failure",
-    # "low storage",
-    # "maintenance",
-    # "notification",
-    # "recovery",
-  ]
+  name_prefix      = var.db_event_subscription_prefix_name
+  sns_topic        = "${aws_sns_topic.default.arn}"
+  source_type      = var.source_type
+  source_ids       = ["${var.db_instance_id}"]
+  event_categories = local.event_categories[var.source_type]
 
   depends_on = ["aws_sns_topic_policy.default"]
 }

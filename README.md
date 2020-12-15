@@ -87,6 +87,11 @@ module "rds_alarms" {
 | freeable_memory_threshold | The minimum amount of available random access memory in Byte. | string | `64000000` | no |
 | swap_usage_threshold | The maximum amount of swap space used on the DB instance in Byte. | string | `256000000` | no |
 
+@todo(weston) add new variables,
+  - db_cluster_event_categories
+  - db_instance_event_categories
+  - source_type
+
 ## Outputs
 
 | Name | Description |

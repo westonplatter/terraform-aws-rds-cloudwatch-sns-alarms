@@ -65,3 +65,15 @@ variable "swap_usage_threshold" {
 
   # 256 Megabyte in Byte
 }
+
+variable "db_cluster_event_categories" {
+  description = "value"
+  type        = list(str)
+  default     = ["failover"]
+}
+
+variable "db_instance_event_categories" {
+  description = "value"
+  type        = list(str)
+  default     = ["failover", "failure", "low storage", "maintenance", "notification", "recovery"]
+}
