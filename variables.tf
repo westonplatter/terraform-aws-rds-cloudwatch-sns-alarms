@@ -8,14 +8,28 @@ variable "db_event_subscription_prefix_name" {
   default = "rds-event-sub"
 }
 
-variable "source_type" {
-  type    = string
-  default = "db-instance"
-}
-
 variable "db_instance_id" {
   description = "The instance ID of the RDS database instance that you want to monitor."
   type        = string
+  default     = ""
+}
+
+variable "db_cluster_id" {
+  description = "The cluster ID of the RDS database instance that you want to monitor."
+  type        = string
+  default     = ""
+}
+
+variable "db_cluster_event_categories" {
+  description = "For a cluster, subcribe to these event categories."
+  type        = list(string)
+  default     = ["failover"]
+}
+
+variable "db_instance_event_categories" {
+  description = "For an instance, subscribe to these event categoires."
+  type        = list(string)
+  default     = ["failover", "failure", "low storage", "maintenance", "notification", "recovery"]
 }
 
 variable "burst_balance_threshold" {
@@ -64,16 +78,4 @@ variable "swap_usage_threshold" {
   default     = 256000000
 
   # 256 Megabyte in Byte
-}
-
-variable "db_cluster_event_categories" {
-  description = "value"
-  type        = list(string)
-  default     = ["failover"]
-}
-
-variable "db_instance_event_categories" {
-  description = "value"
-  type        = list(string)
-  default     = ["failover", "failure", "low storage", "maintenance", "notification", "recovery"]
 }

@@ -9,8 +9,8 @@ locals {
     SwapUsageThreshold        = max(var.swap_usage_threshold, 0)
   }
 
-  instance_count = var.source_type == "db-instance" ? 1 : 0
-  cluster_count  = var.source_type == "db-instance" ? 1 : 0
+  instance_count = var.db_instance_id == "" ? 0 : 1
+  cluster_count  = var.db_cluster_id == "" ? 0 : 1
 }
 
 
