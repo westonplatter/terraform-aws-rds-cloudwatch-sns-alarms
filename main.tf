@@ -31,7 +31,7 @@ resource "aws_db_event_subscription" "default" {
   source_ids       = [local.source_id]
   event_categories = local.event_categories
 
-  depends_on = ["aws_sns_topic_policy.default"]
+  depends_on = [aws_sns_topic_policy.default]
 }
 
 resource "aws_sns_topic_policy" "default" {
